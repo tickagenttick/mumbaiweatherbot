@@ -55,11 +55,12 @@ def get_mumbai_weather():
 
 
 def send_message(chat_id, text):
-    requests.post(
+    resp = requests.post(
         f"{TELEGRAM_API}/sendMessage",
         json={"chat_id": chat_id, "text": text},
         timeout=10,
     )
+    logging.info(f"Telegram sendMessage response: {resp.status_code} {resp.text}")
 
 
 @app.route("/")
