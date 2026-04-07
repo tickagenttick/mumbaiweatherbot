@@ -1,6 +1,9 @@
 import os
+import logging
 import requests
 from flask import Flask, request, jsonify
+
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 
@@ -59,6 +62,11 @@ def send_message(chat_id, text):
     )
 
 
+@app.route("/")
+def index():
+    return "Mumbai Weather Bot is running!", 200
+
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
     update = request.get_json(silent=True)
@@ -68,6 +76,8 @@ def webhook():
     message = update.get("message", {})
     text = message.get("text", "")
     chat_id = message.get("chat", {}).get("id")
+
+    logging.info(f"Received message: '{text}' from chat_id: {chat_id}")
 
     if chat_id and "mumbai weather" in text.lower():
         try:
