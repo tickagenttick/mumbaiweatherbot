@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Language Indicator — Style Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f7;
+    padding: 48px 32px 96px;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .page-header p {
+    font-size: 15px;
+    color: #a1a1a6;
+    max-width: 680px;
+    line-height: 1.5;
+  }
+
+  .controls {
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .controls button {
+    background: #1d1d1f;
+    color: #f5f5f7;
+    border: 1px solid #2d2d30;
+    padding: 10px 18px;
+    border-radius: 980px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    font-family: inherit;
+  }
+
+  .controls button:hover { background: #2a2a2d; }
+  .controls button:active { transform: scale(0.97); }
+  .controls button.primary {
+    background: #0071e3;
+    border-color: #0071e3;
+  }
+  .controls button.primary:hover { background: #0077ed; }
+
+  .grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .example-card {
+    background: #141416;
+    border: 1px solid #1f1f22;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .example-label {
+    padding: 16px 20px 8px;
+  }
+
+  .example-label .title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .example-label .desc {
+    font-size: 12px;
+    color: #86868b;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  /* Video frame mock */
+  .video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 12px 16px 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 30% 30%, #2a3a5c 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, #5c2a4a 0%, transparent 50%),
+      linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+
+  .video-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  }
+
+  .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+  }
+
+  .play-icon::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 12px solid #fff;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 3px;
+  }
+
+  /* Base indicator position */
+  .lang-indicator {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+  }
+
+  /* ============================================
+     STYLE 1 — Frosted Glass Pill
+     ============================================ */
+  .style-glass {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 980px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .style-glass .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #30d158;
+    box-shadow: 0 0 6px rgba(48, 209, 88, 0.6);
+  }
+
+  /* ============================================
+     STYLE 2 — Minimal Text
+     ============================================ */
+  .style-minimal {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+
+  /* ============================================
+     STYLE 3 — Solid Dark Pill
+     ============================================ */
+  .style-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .style-solid .code {
+    opacity: 0.95;
+  }
+
+  /* ============================================
+     STYLE 4 — Flag + Label
+     ============================================ */
+  .style-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 11px 6px 8px;
+    border-radius: 980px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .style-flag .flag-emoji {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* ============================================
+     STYLE 5 — Thin Outline
+     ============================================ */
+  .style-outline {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.15);
+    backdrop-filter: blur(6px);
+  }
+
+  /* ============================================
+     STYLE 6 — Dynamic Island-style
+     ============================================ */
+  .style-island {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    border-radius: 980px;
+    background: #000;
+    border: 0.5px solid rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .style-island .bars {
+    display: inline-flex;
+    align-items: end;
+    gap: 2px;
+    height: 10px;
+  }
+
+  .style-island .bars span {
+    width: 2px;
+    background: #30d158;
+    border-radius: 1px;
+  }
+  .style-island .bars span:nth-child(1) { height: 40%; }
+  .style-island .bars span:nth-child(2) { height: 70%; }
+  .style-island .bars span:nth-child(3) { height: 55%; }
+
+  /* ============================================
+     BLINK / ATTENTION ANIMATION
+     Triggered by adding .is-changing class
+     ============================================ */
+
+  /* Style 1 — pulses with glow */
+  .lang-indicator.is-changing .style-glass {
+    animation: glassBlink 1.6s ease-in-out;
+  }
+  @keyframes glassBlink {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    15% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(255,255,255,0.18); background: rgba(255,255,255,0.28); }
+    30% { transform: scale(1); background: rgba(255,255,255,0.12); }
+    45% { transform: scale(1.06); background: rgba(255,255,255,0.22); }
+    60% { transform: scale(1); background: rgba(255,255,255,0.12); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  }
+
+  /* Style 2 — opacity pulse */
+  .lang-indicator.is-changing .style-minimal {
+    animation: minimalBlink 1.6s ease-in-out;
+  }
+  @keyframes minimalBlink {
+    0%, 100% { opacity: 1; }
+    15% { opacity: 0.2; }
+    30% { opacity: 1; }
+    45% { opacity: 0.2; }
+    60% { opacity: 1; }
+  }
+
+  /* Style 3 — color wash */
+  .lang-indicator.is-changing .style-solid {
+    animation: solidBlink 1.6s ease-in-out;
+  }
+  @keyframes solidBlink {
+    0%, 100% { background: rgba(0,0,0,0.55); color: #fff; }
+    15% { background: #ffffff; color: #000; }
+    30% { background: rgba(0,0,0,0.55); color: #fff; }
+    45% { background: #ffffff; color: #000; }
+    60% { background: rgba(0,0,0,0.55); color: #fff; }
+  }
+
+  /* Style 4 — scale + glow */
+  .lang-indicator.is-changing .style-flag {
+    animation: flagBlink 1.6s ease-in-out;
+  }
+  @keyframes flagBlink {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(10, 132, 255, 0); }
+    15% { transform: scale(1.1); box-shadow: 0 0 16px 2px rgba(10, 132, 255, 0.5); background: rgba(10, 132, 255, 0.25); }
+    40% { transform: scale(1); }
+    55% { transform: scale(1.08); box-shadow: 0 0 12px 1px rgba(10, 132, 255, 0.35); }
+    75% { transform: scale(1); }
+  }
+
+  /* Style 5 — border flash */
+  .lang-indicator.is-changing .style-outline {
+    animation: outlineBlink 1.6s ease-in-out;
+  }
+  @keyframes outlineBlink {
+    0%, 100% { border-color: rgba(255,255,255,0.35); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    15% { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+    30% { border-color: rgba(255,255,255,0.35); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+    45% { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+    60% { border-color: rgba(255,255,255,0.35); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  }
+
+  /* Style 6 — expand + settle */
+  .lang-indicator.is-changing .style-island {
+    animation: islandBlink 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes islandBlink {
+    0% { transform: scale(1); }
+    10% { transform: scale(1.15); }
+    25% { transform: scale(0.98); }
+    40% { transform: scale(1.08); }
+    55% { transform: scale(1); }
+    100% { transform: scale(1); }
+  }
+  .lang-indicator.is-changing .style-island .bars span {
+    animation: barsPulse 0.5s ease-in-out 3;
+  }
+  @keyframes barsPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Language text swap animation (subtle crossfade) */
+  .lang-text {
+    display: inline-block;
+    transition: opacity 0.2s ease;
+  }
+  .lang-indicator.is-swapping .lang-text {
+    opacity: 0;
+  }
+
+  .footer-note {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    padding: 20px 24px;
+    background: #141416;
+    border: 1px solid #1f1f22;
+    border-radius: 14px;
+    font-size: 13px;
+    color: #a1a1a6;
+    line-height: 1.6;
+  }
+
+  .footer-note strong {
+    color: #f5f5f7;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Language Indicator — Style Reference</h1>
+  <p>Six minimalist treatments for the top-right language tag. Click <em>Simulate Language Change</em> to see each indicator blink for attention, then settle into its resting state for the duration of the video.</p>
+</div>
+
+<div class="controls">
+  <button class="primary" onclick="cycleLanguage()">Simulate Language Change</button>
+  <button onclick="setLanguage('EN', 'English', '🇬🇧')">Set: English</button>
+  <button onclick="setLanguage('ES', 'Español', '🇪🇸')">Set: Spanish</button>
+  <button onclick="setLanguage('JA', '日本語', '🇯🇵')">Set: Japanese</button>
+  <button onclick="setLanguage('HI', 'हिन्दी', '🇮🇳')">Set: Hindi</button>
+  <button onclick="setLanguage('FR', 'Français', '🇫🇷')">Set: French</button>
+</div>
+
+<div class="grid">
+
+  <!-- STYLE 1 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">01 — Frosted Glass Pill</div>
+      <div class="desc">iOS-style blurred translucent pill with a small status dot. Blinks with a scale + glow pulse.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="1">
+        <div class="style-glass">
+          <span class="dot"></span>
+          <span class="lang-text" data-field="code">EN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 2 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">02 — Minimal Text</div>
+      <div class="desc">Pure text with subtle shadow. The lightest possible footprint. Blinks by opacity pulse.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="2">
+        <div class="style-minimal">
+          <span class="lang-text" data-field="name">ENGLISH</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 3 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">03 — Solid Dark Badge</div>
+      <div class="desc">Classic YouTube/Netflix-style caption badge. Blinks with inverted color wash.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="3">
+        <div class="style-solid">
+          <span class="code lang-text" data-field="code">EN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 4 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">04 — Flag + Label</div>
+      <div class="desc">Flag emoji paired with language code. Blinks with a blue-tinted scale and glow.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="4">
+        <div class="style-flag">
+          <span class="flag-emoji lang-text" data-field="flag">🇬🇧</span>
+          <span class="lang-text" data-field="code">EN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 5 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">05 — Thin Outline</div>
+      <div class="desc">Hairline border with tracked letters. Editorial feel. Blinks by flashing the border.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="5">
+        <div class="style-outline">
+          <span class="lang-text" data-field="code">EN</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE 6 -->
+  <div class="example-card">
+    <div class="example-label">
+      <div class="title">06 — Dynamic Island</div>
+      <div class="desc">Pure black pill with audio bars — suggests active playback. Springs on change.</div>
+    </div>
+    <div class="video-frame">
+      <div class="play-icon"></div>
+      <div class="lang-indicator" data-style="6">
+        <div class="style-island">
+          <span class="bars"><span></span><span></span><span></span></span>
+          <span class="lang-text" data-field="name">English</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">
+  <p><strong>How the animation works:</strong> When a new video loads in a different language, the indicator briefly pulses (~1.6s: two quick flashes) to draw the eye, then returns to a calm resting state for the remainder of the video. The resting state is low-contrast and non-distracting — the flash is the only moment it commands attention.</p>
+  <p style="margin-top:10px;"><strong>Recommended spec:</strong> Animation duration 1.4–1.8s, two visible pulses, easing <code style="font-family:monospace;background:#1f1f22;padding:2px 6px;border-radius:4px;">cubic-bezier(.4,0,.2,1)</code> or a slight spring for playful variants. Resting opacity 80–95%, font-size 11–12px, uppercase tracking ~0.08em for code variants.</p>
+</div>
+
+<script>
+  const languages = [
+    { code: 'EN', name: 'English',  flag: '🇬🇧' },
+    { code: 'ES', name: 'Español',  flag: '🇪🇸' },
+    { code: 'JA', name: '日本語',    flag: '🇯🇵' },
+    { code: 'HI', name: 'हिन्दी',     flag: '🇮🇳' },
+    { code: 'FR', name: 'Français', flag: '🇫🇷' },
+    { code: 'DE', name: 'Deutsch',  flag: '🇩🇪' },
+  ];
+
+  let currentIndex = 0;
+
+  function setLanguage(code, name, flag) {
+    const indicators = document.querySelectorAll('.lang-indicator');
+    indicators.forEach(ind => {
+      // Quick text swap
+      ind.classList.add('is-swapping');
+      setTimeout(() => {
+        ind.querySelectorAll('[data-field="code"]').forEach(el => {
+          el.textContent = code;
+        });
+        ind.querySelectorAll('[data-field="name"]').forEach(el => {
+          // Style 2 is uppercase, style 6 is title case
+          if (ind.dataset.style === '2') {
+            el.textContent = name.toUpperCase();
+          } else {
+            el.textContent = name;
+          }
+        });
+        ind.querySelectorAll('[data-field="flag"]').forEach(el => {
+          el.textContent = flag;
+        });
+        ind.classList.remove('is-swapping');
+      }, 180);
+
+      // Trigger blink animation
+      ind.classList.remove('is-changing');
+      // Force reflow to restart animation
+      void ind.offsetWidth;
+      ind.classList.add('is-changing');
+
+      setTimeout(() => {
+        ind.classList.remove('is-changing');
+      }, 1900);
+    });
+  }
+
+  function cycleLanguage() {
+    currentIndex = (currentIndex + 1) % languages.length;
+    const l = languages[currentIndex];
+    setLanguage(l.code, l.name, l.flag);
+  }
+
+  // Auto-demo on load
+  window.addEventListener('load', () => {
+    setTimeout(cycleLanguage, 800);
+  });
+</script>
+
+</body>
+</html>

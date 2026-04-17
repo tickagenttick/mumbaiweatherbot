@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: language-indicator-demo
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
