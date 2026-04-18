@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global GTM — OTT Stack</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f5f7;
+      --bg-card: #ffffff;
+      --bg-secondary: #f0f0f2;
+      --text: #1d1d1f;
+      --text-muted: #515154;
+      --text-faint: #86868b;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+      --tag-bg: #e8f0fe;
+      --tag-color: #1a56c4;
+      --blue: #0071e3;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-pill: 30px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000000;
+        --bg-card: #1c1c1e;
+        --bg-secondary: #2c2c2e;
+        --text: #f5f5f7;
+        --text-muted: #aeaeb2;
+        --text-faint: #636366;
+        --border: rgba(255,255,255,0.08);
+        --border-strong: rgba(255,255,255,0.14);
+        --shadow: 0 2px 12px rgba(0,0,0,0.4);
+        --shadow-sm: 0 1px 4px rgba(0,0,0,0.3);
+        --tag-bg: #1a2a45;
+        --tag-color: #5eaaff;
+        --blue: #2997ff;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 1.5rem 1rem 4rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .doc-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: clamp(22px, 6vw, 30px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-faint);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── Section card ── */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-head {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 0.5rem;
+    }
+
+    .prose {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Pills ── */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 13px;
+      padding: 5px 13px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Wedge cards ── */
+    .wedge {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .wedge-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .wedge-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .wedge-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+    }
+
+    /* ── iOS Notification ── */
+    .notif-wrap {
+      margin: 0.75rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .notif {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.07);
+      padding: 11px 13px 11px 11px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .notif {
+        background: rgba(44,44,46,0.88);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+      }
+    }
+
+    .notif-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(145deg, #1a3a6b 0%, #0071e3 100%);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .notif-body { flex: 1; min-width: 0; }
+
+    .notif-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+
+    .notif-app {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1d1d1f;
+      letter-spacing: 0.01em;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .notif-app { color: #f5f5f7; }
+    }
+
+    .notif-time {
+      font-size: 11px;
+      color: #86868b;
+    }
+
+    .notif-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d1d1f;
+      line-height: 1.35;
+      margin-bottom: 1px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .notif-title { color: #f5f5f7; }
+    }
+
+    .notif-msg {
+      font-size: 13px;
+      font-weight: 400;
+      color: #515154;
+      line-height: 1.4;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .notif-msg { color: #aeaeb2; }
+    }
+
+    .wedge-detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 0.65rem;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Summary ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 360px) {
+      .summary-grid { grid-template-columns: 1fr; }
+    }
+
+    .summary-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 0.9rem;
+    }
+
+    .summary-step {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .summary-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── Spacer label above wedges ── */
+    .group-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    /* ── Wedge image ── */
+    .wedge-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 0.75rem 0 0.65rem;
+      display: block;
+      height: auto;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="doc-label">Strategy note</div>
+  <h1>Global GTM for the OTT stack</h1>
+  <div class="subtitle">Enter with a wedge. Prove ROI. Expand.</div>
+
+  <!-- Context -->
+  <div class="card">
+    <div class="section-head">Context</div>
+    <div class="prose">Selling a full OTT stack globally is hard. Multiple stakeholders resist — each with different concerns.</div>
+    <div class="pill-row">
+      <span class="pill">High replacement risk</span>
+      <span class="pill">CTO resists migration</span>
+      <span class="pill">CFO questions cost</span>
+      <span class="pill">CEO wants growth, not rebuild</span>
+    </div>
+  </div>
+
+  <!-- Core Idea -->
+  <div class="card">
+    <div class="section-head">Core idea</div>
+    <div class="prose">Enter with a wedge, not the full stack. Low friction. Fast ROI. Then expand.</div>
+    <div class="pill-row">
+      <span class="pill">Align with CFO on cost</span>
+      <span class="pill">Align with CEO on growth</span>
+      <span class="pill">Neutralize CTO — no migration pain</span>
+    </div>
+  </div>
+
+  <!-- Wedges -->
+  <div class="group-label">Potential wedges</div>
+
+  <div class="wedge">
+    <div class="wedge-header">
+      <span class="wedge-num">01</span>
+      <span class="wedge-title">Content-aware engagement</span>
+    </div>
+    <div class="notif-wrap">
+      <div class="notif">
+        <div class="notif-icon">▶</div>
+        <div class="notif-body">
+          <div class="notif-header">
+            <span class="notif-app">StreamApp</span>
+            <span class="notif-time">now</span>
+          </div>
+          <div class="notif-title">Pick up where you left off</div>
+          <div class="notif-msg">If Ted gets caught, it's over. Does he pull it off? Resume Episode 3.</div>
+        </div>
+      </div>
+    </div>
+    <div class="wedge-detail">Generic tools like Braze, CleverTap, and MoEngage don't understand content deeply. The opportunity is narrative-aware, intent-driven engagement.</div>
+    <div class="tag-row">
+      <span class="tag">CTO-friendly</span>
+      <span class="tag">CEO-friendly</span>
+    </div>
+  </div>
+
+  <div class="wedge">
+    <div class="wedge-header">
+      <span class="wedge-num">02</span>
+      <span class="wedge-title">Micro-content layer</span>
+    </div>
+    <img class="wedge-img" src="img_micro.png" alt="AI Clip — Micro-content layer demo" />
+    <div class="wedge-detail">Convert long-form to short-form using AI. No incremental content cost initially. Drives discovery and engagement. Solves cold start for micro-drama formats.</div>
+    <div class="tag-row">
+      <span class="tag">CFO-friendly</span>
+    </div>
+  </div>
+
+  <div class="wedge">
+    <div class="wedge-header">
+      <span class="wedge-num">03</span>
+      <span class="wedge-title">Content intelligence for monetization</span>
+    </div>
+    <div class="wedge-detail">Generate deep metadata using AI. Enables contextual ad placement. Improves yield without hurting the viewer experience.</div>
+    <div class="tag-row">
+      <span class="tag">CFO-friendly</span>
+      <span class="tag">CEO-friendly</span>
+    </div>
+  </div>
+
+  <div class="wedge">
+    <div class="wedge-header">
+      <span class="wedge-num">04</span>
+      <span class="wedge-title">Adjacent content layer</span>
+    </div>
+    <img class="wedge-img" src="img_adjacent.png" alt="Manga/comic adjacent content layer demo" style="max-height:260px;" />
+    <div class="wedge-detail">AI-assisted side stories and character arcs, creatively controlled. Audio-first today — scalable and low-cost. Expand later into formats like manga.</div>
+    <div class="tag-row">
+      <span class="tag">CEO-friendly</span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="group-label">Summary</div>
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="summary-step">Step 1</div>
+      <div class="summary-text">Land with one wedge</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-step">Step 2</div>
+      <div class="summary-text">Prove ROI — engagement, retention, revenue</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-step">Step 3</div>
+      <div class="summary-text">Expand into broader stack</div>
+    </div>
+  </div>
+
+</body>
+</html>
