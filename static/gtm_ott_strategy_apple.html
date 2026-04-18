@@ -169,7 +169,7 @@
       padding: 1.5rem 1rem 4rem;
       max-width: 600px;
       margin: 0 auto;
-      font-size: 15px;
+      font-size: 16px;
       -webkit-font-smoothing: antialiased;
       transition: background 0.3s, color 0.25s;
     }
@@ -185,7 +185,7 @@
     }
 
     h1 {
-      font-size: clamp(22px, 6vw, 30px);
+      font-size: clamp(24px, 7vw, 34px);
       font-weight: 700;
       color: var(--text);
       line-height: 1.2;
@@ -218,7 +218,7 @@
     }
 
     .prose {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-muted);
       line-height: 1.65;
       margin-bottom: 0.75rem;
@@ -267,7 +267,7 @@
     }
 
     .wedge-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       color: var(--text);
       letter-spacing: -0.015em;
@@ -330,22 +330,23 @@
     }
 
     .notif-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--notif-title);
-      line-height: 1.35;
-      margin-bottom: 1px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--notif-time);
+      line-height: 1.3;
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
     }
 
     .notif-msg {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--notif-msg);
-      line-height: 1.4;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--notif-title);
+      line-height: 1.5;
     }
 
     .wedge-detail {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--text-muted);
       line-height: 1.65;
     }
@@ -455,6 +456,90 @@
     }
 
 
+
+    /* ── Notif resume link ── */
+    .notif-resume {
+      color: var(--blue);
+      cursor: pointer;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
+    .notif-resume:hover { opacity: 0.75; }
+
+    /* ── Role tag colors ── */
+    .tag-cto { background: #0c1f3a; color: #60a5fa; }
+    .tag-cfo { background: #052e16; color: #4ade80; }
+    .tag-ceo { background: #2a1500; color: #fb923c; }
+
+    [data-theme="light"] .tag-cto { background: #dbeafe; color: #1d4ed8; }
+    [data-theme="light"] .tag-cfo { background: #dcfce7; color: #16a34a; }
+    [data-theme="light"] .tag-ceo { background: #ffedd5; color: #c2410c; }
+
+    [data-theme="color"] .tag-cto { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    [data-theme="color"] .tag-cfo { background: rgba(34,197,94,0.13); color: #86efac; border: 1px solid rgba(34,197,94,0.28); }
+    [data-theme="color"] .tag-ceo { background: rgba(251,146,60,0.13); color: #fed7aa; border: 1px solid rgba(251,146,60,0.28); }
+
+    /* ── Section card accents ── */
+    .card-context  { border-left: 3px solid rgba(245,158,11,0.65); padding-left: calc(1.25rem - 3px); }
+    .card-coreidea { border-left: 3px solid rgba(139,92,246,0.65); padding-left: calc(1.25rem - 3px); }
+    .card-context  .section-head { color: #d97706; }
+    .card-coreidea .section-head { color: #8b5cf6; }
+
+    [data-theme="light"] .card-context  { border-left-color: rgba(180,100,0,0.5); background: rgba(245,158,11,0.025); }
+    [data-theme="light"] .card-context  .section-head { color: #b45309; }
+    [data-theme="light"] .card-coreidea { border-left-color: rgba(109,40,217,0.45); background: rgba(139,92,246,0.025); }
+    [data-theme="light"] .card-coreidea .section-head { color: #6d28d9; }
+
+    [data-theme="color"] .card-context  { border-left-color: rgba(251,191,36,0.6); }
+    [data-theme="color"] .card-context  .section-head { color: #fbbf24; }
+    [data-theme="color"] .card-coreidea { border-left-color: rgba(196,181,253,0.55); }
+    [data-theme="color"] .card-coreidea .section-head { color: #c4b5fd; }
+
+    /* ── Expand button ── */
+    .section-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.9rem;
+    }
+    .expand-btn {
+      font-size: 11px;
+      color: var(--text-faint);
+      cursor: pointer;
+      opacity: 0.55;
+      transition: opacity 0.15s, color 0.15s;
+      user-select: none;
+      letter-spacing: 0.02em;
+    }
+    .expand-btn:hover { opacity: 1; color: var(--blue); }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      padding: 9px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      z-index: 1000;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    [data-theme="color"] .toast {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
   </style>
 </head>
 <body>
@@ -472,7 +557,7 @@
   <div class="subtitle">Enter with a wedge. Prove ROI. Expand.</div>
 
   <!-- Context -->
-  <div class="card">
+  <div class="card card-context">
     <div class="section-head">Context</div>
     <div class="prose">Selling a full OTT stack globally is hard. Multiple stakeholders resist — each with different concerns.</div>
     <div class="pill-row">
@@ -481,10 +566,11 @@
       <span class="pill">CFO questions cost</span>
       <span class="pill">CEO wants growth, not rebuild</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <!-- Core Idea -->
-  <div class="card">
+  <div class="card card-coreidea">
     <div class="section-head">Core idea</div>
     <div class="prose">Enter with a wedge, not the full stack. Low friction. Fast ROI. Then expand.</div>
     <div class="pill-row">
@@ -492,6 +578,7 @@
       <span class="pill">Align with CEO on growth</span>
       <span class="pill">Neutralize CTO — no migration pain</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <!-- Wedges -->
@@ -511,15 +598,16 @@
             <span class="notif-time">now</span>
           </div>
           <div class="notif-title">Pick up where you left off</div>
-          <div class="notif-msg">If Ted gets caught, it's over. Does he pull it off? Resume Episode 3.</div>
+          <div class="notif-msg">If Ted gets caught, it's over. Does he pull it off? <span class="notif-resume" onclick="showBrewing()">Resume Episode 3 →</span></div>
         </div>
       </div>
     </div>
     <div class="wedge-detail">Generic tools like Braze, CleverTap, and MoEngage don't understand content deeply. The opportunity is narrative-aware, intent-driven engagement.</div>
     <div class="tag-row">
-      <span class="tag">CTO-friendly</span>
-      <span class="tag">CEO-friendly</span>
+      <span class="tag tag-cto">CTO-friendly</span>
+      <span class="tag tag-ceo">CEO-friendly</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <div class="wedge">
@@ -530,8 +618,9 @@
     <img class="wedge-img" src="img_micro.png" alt="AI Clip — Micro-content layer demo" />
     <div class="wedge-detail">Convert long-form to short-form using AI. No incremental content cost initially. Drives discovery and engagement. Solves cold start for micro-drama formats.</div>
     <div class="tag-row">
-      <span class="tag">CFO-friendly</span>
+      <span class="tag tag-cfo">CFO-friendly</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <div class="wedge">
@@ -541,9 +630,10 @@
     </div>
     <div class="wedge-detail">Generate deep metadata using AI. Enables contextual ad placement. Improves yield without hurting the viewer experience.</div>
     <div class="tag-row">
-      <span class="tag">CFO-friendly</span>
-      <span class="tag">CEO-friendly</span>
+      <span class="tag tag-cfo">CFO-friendly</span>
+      <span class="tag tag-ceo">CEO-friendly</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <div class="wedge">
@@ -554,8 +644,9 @@
     <img class="wedge-img" src="img_adjacent.png" alt="Manga/comic adjacent content layer demo" style="max-height:260px;" />
     <div class="wedge-detail">AI-assisted side stories and character arcs, creatively controlled. Audio-first today — scalable and low-cost. Expand later into formats like manga.</div>
     <div class="tag-row">
-      <span class="tag">CEO-friendly</span>
+      <span class="tag tag-ceo">CEO-friendly</span>
     </div>
+    <div class="section-footer"><span class="expand-btn" onclick="showBrewing()">Expand</span></div>
   </div>
 
   <!-- Summary -->
@@ -576,11 +667,20 @@
   </div>
 
 
+  <div class="toast" id="toast">Brewing ☕</div>
+
   <script>
     function setTheme(btn) {
       document.documentElement.setAttribute('data-theme', btn.dataset.t);
       document.querySelectorAll('.theme-toggle button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+    }
+    let _toastT;
+    function showBrewing() {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      clearTimeout(_toastT);
+      _toastT = setTimeout(() => t.classList.remove('show'), 2200);
     }
   </script>
 </body>
