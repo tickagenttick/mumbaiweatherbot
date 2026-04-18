@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,36 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-pill: 30px;
+    }
+
+    /* ── Dark theme (default) ── */
+    [data-theme="dark"] {
+      --bg: #000000;
+      --bg-card: #1c1c1e;
+      --bg-secondary: #2c2c2e;
+      --text: #f5f5f7;
+      --text-muted: #aeaeb2;
+      --text-faint: #636366;
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
+      --shadow: 0 2px 12px rgba(0,0,0,0.4);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.3);
+      --tag-bg: #1a2a45;
+      --tag-color: #5eaaff;
+      --blue: #2997ff;
+      --notif-bg: rgba(44,44,46,0.88);
+      --notif-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+      --notif-app: #f5f5f7;
+      --notif-title: #f5f5f7;
+      --notif-msg: #aeaeb2;
+      --notif-time: #636366;
+    }
+
+    /* ── Light theme ── */
+    [data-theme="light"] {
       --bg: #f5f5f7;
       --bg-card: #ffffff;
       --bg-secondary: #f0f0f2;
@@ -21,27 +51,35 @@
       --tag-bg: #e8f0fe;
       --tag-color: #1a56c4;
       --blue: #0071e3;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --radius-pill: 30px;
+      --notif-bg: rgba(255,255,255,0.82);
+      --notif-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.07);
+      --notif-app: #1d1d1f;
+      --notif-title: #1d1d1f;
+      --notif-msg: #515154;
+      --notif-time: #86868b;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #000000;
-        --bg-card: #1c1c1e;
-        --bg-secondary: #2c2c2e;
-        --text: #f5f5f7;
-        --text-muted: #aeaeb2;
-        --text-faint: #636366;
-        --border: rgba(255,255,255,0.08);
-        --border-strong: rgba(255,255,255,0.14);
-        --shadow: 0 2px 12px rgba(0,0,0,0.4);
-        --shadow-sm: 0 1px 4px rgba(0,0,0,0.3);
-        --tag-bg: #1a2a45;
-        --tag-color: #5eaaff;
-        --blue: #2997ff;
-      }
+    /* ── Color theme (deep indigo / streaming-inspired) ── */
+    [data-theme="color"] {
+      --bg: #09091e;
+      --bg-card: #111230;
+      --bg-secondary: #1b1d48;
+      --text: #e6e6ff;
+      --text-muted: #9898c8;
+      --text-faint: #5555a0;
+      --border: rgba(130,130,255,0.14);
+      --border-strong: rgba(130,130,255,0.24);
+      --shadow: 0 2px 20px rgba(0,0,60,0.55), 0 1px 4px rgba(0,0,40,0.4);
+      --shadow-sm: 0 1px 8px rgba(0,0,60,0.35);
+      --tag-bg: #1c1260;
+      --tag-color: #b080ff;
+      --blue: #00b8ff;
+      --notif-bg: rgba(15,16,55,0.92);
+      --notif-shadow: 0 4px 24px rgba(0,0,80,0.5), 0 1px 4px rgba(0,0,50,0.35);
+      --notif-app: #e6e6ff;
+      --notif-title: #e6e6ff;
+      --notif-msg: #9898c8;
+      --notif-time: #5555a0;
     }
 
     body {
@@ -165,22 +203,15 @@
     .notif {
       width: 100%;
       max-width: 340px;
-      background: rgba(255,255,255,0.82);
+      background: var(--notif-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.07);
+      box-shadow: var(--notif-shadow);
       padding: 11px 13px 11px 11px;
       display: flex;
       align-items: flex-start;
       gap: 10px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .notif {
-        background: rgba(44,44,46,0.88);
-        box-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
-      }
     }
 
     .notif-icon {
@@ -208,40 +239,28 @@
     .notif-app {
       font-size: 12px;
       font-weight: 600;
-      color: #1d1d1f;
+      color: var(--notif-app);
       letter-spacing: 0.01em;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .notif-app { color: #f5f5f7; }
     }
 
     .notif-time {
       font-size: 11px;
-      color: #86868b;
+      color: var(--notif-time);
     }
 
     .notif-title {
       font-size: 13px;
       font-weight: 600;
-      color: #1d1d1f;
+      color: var(--notif-title);
       line-height: 1.35;
       margin-bottom: 1px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .notif-title { color: #f5f5f7; }
     }
 
     .notif-msg {
       font-size: 13px;
       font-weight: 400;
-      color: #515154;
+      color: var(--notif-msg);
       line-height: 1.4;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .notif-msg { color: #aeaeb2; }
     }
 
     .wedge-detail {
@@ -318,9 +337,58 @@
       display: block;
       height: auto;
       }
+
+    /* ── Theme toggle ── */
+    .theme-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.4rem;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .theme-toggle button {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-faint);
+      transition: background 0.18s, color 0.18s;
+      letter-spacing: 0.01em;
+    }
+
+    .theme-toggle button.active {
+      background: var(--bg-card);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="color"] .theme-toggle button.active {
+      background: linear-gradient(135deg, #3a1fa0 0%, #0070cc 100%);
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
+
+  <div class="theme-bar">
+    <div class="theme-toggle">
+      <button data-t="dark" class="active" onclick="setTheme(this)">Dark</button>
+      <button data-t="light" onclick="setTheme(this)">Light</button>
+      <button data-t="color" onclick="setTheme(this)">Color</button>
+    </div>
+  </div>
 
   <div class="doc-label">Strategy note</div>
   <h1>Global GTM for the OTT stack</h1>
@@ -430,5 +498,13 @@
     </div>
   </div>
 
+
+  <script>
+    function setTheme(btn) {
+      document.documentElement.setAttribute('data-theme', btn.dataset.t);
+      document.querySelectorAll('.theme-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
 </body>
 </html>
