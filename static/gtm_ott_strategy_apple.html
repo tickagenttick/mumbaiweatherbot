@@ -59,27 +59,107 @@
       --notif-time: #86868b;
     }
 
-    /* ── Color theme (deep indigo / streaming-inspired) ── */
+    /* ── Color theme — Deep Space Stream ── */
+    html[data-theme="color"] {
+      background:
+        radial-gradient(ellipse 140% 65% at 10% 0%,  rgba(100,20,160,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 120% 55% at 90% 110%, rgba(5,90,150,0.50)  0%, transparent 55%),
+        radial-gradient(ellipse 70%  45% at 55% 48%,  rgba(40,0,80,0.30)   0%, transparent 70%),
+        #06060f;
+      min-height: 100vh;
+    }
+
     [data-theme="color"] {
-      --bg: #09091e;
-      --bg-card: #111230;
-      --bg-secondary: #1b1d48;
-      --text: #e6e6ff;
-      --text-muted: #9898c8;
-      --text-faint: #5555a0;
-      --border: rgba(130,130,255,0.14);
-      --border-strong: rgba(130,130,255,0.24);
-      --shadow: 0 2px 20px rgba(0,0,60,0.55), 0 1px 4px rgba(0,0,40,0.4);
-      --shadow-sm: 0 1px 8px rgba(0,0,60,0.35);
-      --tag-bg: #1c1260;
-      --tag-color: #b080ff;
-      --blue: #00b8ff;
-      --notif-bg: rgba(15,16,55,0.92);
-      --notif-shadow: 0 4px 24px rgba(0,0,80,0.5), 0 1px 4px rgba(0,0,50,0.35);
-      --notif-app: #e6e6ff;
-      --notif-title: #e6e6ff;
-      --notif-msg: #9898c8;
-      --notif-time: #5555a0;
+      --bg: transparent;
+      --bg-card: rgba(255,255,255,0.045);
+      --bg-secondary: rgba(255,255,255,0.07);
+      --text: #f0eeff;
+      --text-muted: #b8b4e0;
+      --text-faint: #5c58a0;
+      --border: rgba(160,100,255,0.22);
+      --border-strong: rgba(160,100,255,0.38);
+      --shadow: 0 4px 32px rgba(70,15,160,0.28), 0 1px 6px rgba(0,0,0,0.45);
+      --shadow-sm: 0 2px 14px rgba(70,15,160,0.22);
+      --tag-bg: rgba(168,85,247,0.14);
+      --tag-color: #c084fc;
+      --blue: #a855f7;
+      --notif-bg: rgba(8,4,28,0.72);
+      --notif-shadow: 0 4px 30px rgba(70,15,160,0.38), 0 1px 6px rgba(0,0,0,0.55);
+      --notif-app: #f0eeff;
+      --notif-title: #f0eeff;
+      --notif-msg: #b8b4e0;
+      --notif-time: #5c58a0;
+    }
+
+    /* Glass cards */
+    [data-theme="color"] .card,
+    [data-theme="color"] .wedge {
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--border);
+    }
+
+    [data-theme="color"] body { background: transparent; }
+
+    [data-theme="color"] .summary-card {
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(160,100,255,0.16);
+    }
+
+    [data-theme="color"] .pill {
+      background: rgba(255,255,255,0.07);
+      color: rgba(215,205,255,0.82);
+    }
+
+    [data-theme="color"] .tag {
+      border: 1px solid rgba(168,85,247,0.28);
+    }
+
+    /* Gradient text */
+    [data-theme="color"] h1 {
+      background: linear-gradient(130deg, #d8b4fe 15%, #67e8f9 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="color"] .wedge-num {
+      background: linear-gradient(130deg, #a855f7, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="color"] .doc-label {
+      background: linear-gradient(130deg, #a855f7, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Notif icon */
+    [data-theme="color"] .notif-icon {
+      background: linear-gradient(145deg, #7c3aed 0%, #0891b2 100%);
+    }
+
+    /* Image glow */
+    [data-theme="color"] .wedge-img {
+      box-shadow: 0 6px 36px rgba(100,20,200,0.32), 0 0 0 1px rgba(160,100,255,0.16);
+    }
+
+    /* Toggle */
+    [data-theme="color"] .theme-toggle {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(160,100,255,0.22);
+      backdrop-filter: blur(14px);
+    }
+
+    [data-theme="color"] .theme-toggle button.active {
+      background: linear-gradient(135deg, #7c3aed 0%, #0891b2 100%);
+      color: #fff;
+      box-shadow: 0 2px 14px rgba(124,58,237,0.45);
     }
 
     body {
@@ -91,6 +171,7 @@
       margin: 0 auto;
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.25s;
     }
 
     /* ── Header ── */
@@ -373,10 +454,6 @@
       box-shadow: var(--shadow-sm);
     }
 
-    [data-theme="color"] .theme-toggle button.active {
-      background: linear-gradient(135deg, #3a1fa0 0%, #0070cc 100%);
-      color: #fff;
-    }
 
   </style>
 </head>
