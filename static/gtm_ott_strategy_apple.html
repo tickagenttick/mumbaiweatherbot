@@ -543,20 +543,34 @@
 
     /* ── Page view counter ── */
     .view-counter {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
       display: inline-flex;
       align-items: center;
       gap: 5px;
       font-size: 11px;
       color: var(--text-faint);
-      opacity: 0.6;
-      margin-left: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 5px 11px 5px 8px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+      opacity: 0.75;
+      z-index: 50;
+      transition: opacity 0.15s;
     }
+    .view-counter:hover { opacity: 1; }
     .view-counter-dot {
       width: 5px;
       height: 5px;
       border-radius: 50%;
       background: var(--blue);
-      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    [data-theme="color"] .view-counter {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
   </style>
@@ -564,7 +578,6 @@
 <body>
 
   <div class="theme-bar">
-    <span class="view-counter" id="vc"><span class="view-counter-dot"></span><span id="vc-num">—</span> views</span>
     <div class="theme-toggle">
       <button data-t="dark" class="active" onclick="setTheme(this)">Dark</button>
       <button data-t="light" onclick="setTheme(this)">Light</button>
@@ -686,6 +699,8 @@
     </div>
   </div>
 
+
+  <div class="view-counter" id="vc"><span class="view-counter-dot"></span><span id="vc-num">—</span> views</div>
 
   <div class="toast" id="toast">Brewing ☕</div>
 
