@@ -540,11 +540,31 @@
       -webkit-backdrop-filter: blur(20px);
     }
 
+
+    /* ── Page view counter ── */
+    .view-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-faint);
+      opacity: 0.6;
+      margin-left: auto;
+    }
+    .view-counter-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      opacity: 0.7;
+    }
+
   </style>
 </head>
 <body>
 
   <div class="theme-bar">
+    <span class="view-counter" id="vc"><span class="view-counter-dot"></span><span id="vc-num">—</span> views</span>
     <div class="theme-toggle">
       <button data-t="dark" class="active" onclick="setTheme(this)">Dark</button>
       <button data-t="light" onclick="setTheme(this)">Light</button>
@@ -675,6 +695,10 @@
       document.querySelectorAll('.theme-toggle button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
+    fetch('https://api.counterapi.dev/v1/tickagenttick-ott/page/up')
+      .then(r => r.json())
+      .then(d => { document.getElementById('vc-num').textContent = d.count.toLocaleString(); })
+      .catch(() => {});
     let _toastT;
     function showBrewing() {
       const t = document.getElementById('toast');
